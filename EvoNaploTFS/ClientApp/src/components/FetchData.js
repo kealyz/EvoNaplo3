@@ -24,8 +24,8 @@ export class FetchData extends Component {
           {forecasts.map(forecast =>
               <tr key={forecast.date}>
                   <td className="accordionHolder">
-                      <label for={forecast.date} className="accordionTitle">{forecast.date}</label>
-                      <input type="checkbox" id={forecast.date} name="accordion_input" class="accordionInput" />
+                      <label htmlFor={forecast.date} className="accordionTitle">{forecast.date}</label>
+                      <input type="checkbox" id={forecast.date} name="accordion_input" className="accordionInput" />
                       <div className="accordionContent">
                           <p>{forecast.temperatureC}</p>
                           <p>{forecast.temperatureF}</p>
