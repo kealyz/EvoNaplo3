@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GetObjectPropValues from './GetObjectPropValues/GetObjectPropValues';
-import Accordion from './Accordion/Accordion';
+import Accordion from './accordion/Accordion';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -19,7 +19,7 @@ export class FetchData extends Component {
           <div>
               {forecasts.map(forecast =>
                   <Accordion title={forecast.date} content={GetObjectPropValues(forecast)}/>                
-                  )}
+              )}
           </div>
       //<table className='table table-striped' aria-labelledby="tabelLabel">
       //  <thead>

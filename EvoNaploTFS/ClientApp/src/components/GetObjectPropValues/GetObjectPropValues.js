@@ -15,13 +15,20 @@
 
 function GetObjectPropValues(obj) {
 
-    const listItems = obj.map((number) =>
-        <li key={number}>
-            {number}
-        </li>
+    const listItems = Object.entries(obj).map(([key, value]) =>
+        <tr key={key}>
+            <td>
+                {key}
+            </td>
+            <td>
+                {value}
+            </td>
+        </tr>
     );
     return (
-        <ul>{listItems}</ul>
+        <table class="AccordionContentTable">
+            {listItems}
+        </table>
     );
 
     //return (
