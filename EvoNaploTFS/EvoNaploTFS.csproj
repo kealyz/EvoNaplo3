@@ -10,7 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +21,19 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\MentorListPage\" />
+    <Folder Include="Pages\MentorAddPage\" />
+    <Folder Include="Pages\AdminListPage\" />
+    <Folder Include="Pages\AdminAddPage\" />
+    <Folder Include="Pages\ProjectAddPage\" />
+    <Folder Include="Pages\ProjectListPage\" />
+    <Folder Include="Pages\SemesterAddPage\" />
+    <Folder Include="Pages\SemesterListPage\" />
+    <Folder Include="Pages\StudentAddPage\" />
+    <Folder Include="Pages\StudentListPage\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
