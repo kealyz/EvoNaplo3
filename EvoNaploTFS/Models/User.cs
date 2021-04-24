@@ -12,8 +12,8 @@ namespace EvoNaplo.Models
         //fields
         private string _firstName;
         private string _lastName;
-        private static readonly List<Semester> _semesters = new List<Semester>();
-        private static readonly List<Project> _projects = new List<Project>();
+        //private static readonly List<Semester> _semesters = new List<Semester>();
+        //private static readonly List<Project> _projects = new List<Project>();
         //PROPS
         public int Id { get; set; }
         public string Email { get; set; }
@@ -46,7 +46,7 @@ namespace EvoNaplo.Models
         public string Name { get; private set; }
         public string PhoneNumber { get; set; }
         public Role Role { get; private set; }
-        public StudentData StudentData { get; set; }
+        //public StudentData StudentData { get; set; }
         public bool IsActive { get; set; }
 
         //with phone number
@@ -80,7 +80,7 @@ namespace EvoNaplo.Models
             if (role == Role.Mentor || role == Role.Admin)
             {   //for mentor and admin
                 Email = email;
-                Password = password;
+                //Password = password;
                 FirstName = firstName;
                 LastName = lastName;
                 PhoneNumber = phoneNumber;
@@ -90,12 +90,12 @@ namespace EvoNaplo.Models
             else //for students
             {
                 Email = email;
-                Password = password;
+                //Password = password;
                 FirstName = firstName;
                 LastName = lastName;
                 PhoneNumber = phoneNumber;
                 Role = role;
-                StudentData = new StudentData();
+                //StudentData = new StudentData();
                 IsActive = true;
             }
         }
@@ -127,7 +127,7 @@ namespace EvoNaplo.Models
             if (role == Role.Mentor || role == Role.Admin)
             {
                 Email = email;
-                Password = password;
+                //Password = password;
                 FirstName = firstName;
                 LastName = lastName;
                 Role = role;
@@ -136,11 +136,11 @@ namespace EvoNaplo.Models
             else
             {
                 Email = email;
-                Password = password;
+                //Password = password;
                 FirstName = firstName;
                 LastName = lastName;
                 Role = role;
-                StudentData = new StudentData();
+                //StudentData = new StudentData();
                 IsActive = true;
             }
         }
@@ -150,119 +150,119 @@ namespace EvoNaplo.Models
             Name = _firstName + " " + _lastName;
         }
 
-        //Start a new Semester by admin rights
-        public void StartNewSemester(DateTime newSemestersStartingTime, DateTime newSemesterEndTime, DateTime newSemesterDemoTime)
-        {
-            if (Role == Role.Admin)
-            {
-                _semesters.Add(new Semester(newSemestersStartingTime, newSemesterEndTime, newSemesterDemoTime));
-            }
-        }
-        //Admin can fill in the SemesterData
-        public void SetSemesterEndDate(int semesterId, DateTime endDate)
-        {
-            if (Role == Role.Admin)
-            {
-                var semester = _semesters.Find(x => x.Id == semesterId);
-                semester.EndDate = endDate;
-            }
-        }
-        public void SetSemesterDemoDate(int semesterId, DateTime demoDate)
-        {
-            if (Role == Role.Admin)
-            {
-                var semester = _semesters.Find(x => x.Id == semesterId);
-                semester.DemoDate = demoDate;
-            }
-        }
+        ////Start a new Semester by admin rights
+        //public void StartNewSemester(DateTime newSemestersStartingTime, DateTime newSemesterEndTime, DateTime newSemesterDemoTime)
+        //{
+        //    if (Role == Role.Admin)
+        //    {
+        //        _semesters.Add(new Semester(newSemestersStartingTime, newSemesterEndTime, newSemesterDemoTime));
+        //    }
+        //}
+        ////Admin can fill in the SemesterData
+        //public void SetSemesterEndDate(int semesterId, DateTime endDate)
+        //{
+        //    if (Role == Role.Admin)
+        //    {
+        //        var semester = _semesters.Find(x => x.Id == semesterId);
+        //        semester.EndDate = endDate;
+        //    }
+        //}
+        //public void SetSemesterDemoDate(int semesterId, DateTime demoDate)
+        //{
+        //    if (Role == Role.Admin)
+        //    {
+        //        var semester = _semesters.Find(x => x.Id == semesterId);
+        //        semester.DemoDate = demoDate;
+        //    }
+        //}
 
-        //Create a new project, it could be admin and a mentor right as well
-        public void CreateProject(string projectName, int semesterId)
-        {
-            if (Role != Role.Student)
-            {
-                _projects.Add(new Project(projectName, semesterId));
-            }
-        }
+        ////Create a new project, it could be admin and a mentor right as well
+        //public void CreateProject(string projectName, int semesterId)
+        //{
+        //    if (Role != Role.Student)
+        //    {
+        //        _projects.Add(new Project(projectName, semesterId));
+        //    }
+        //}
 
-        //Mentor can fill in the project details
-        public void SetProjectSoruceUri(string projectName, Uri sourceUri)
-        {
-            if (Role == Role.Mentor)
-            {
-            var project = _projects.Find(x => x.Name == projectName);
-            project.SourceLink = sourceUri;
-            }
-        }
-        public void SetProjectTechnologies(string projectName, string techs)
-        {
-            if (Role == Role.Mentor)
-            {
-                var project = _projects.Find(x => x.Name == projectName);
-                project.UsedTechnologies = techs;
-            }
-        }
-        public void AddStudentToProject(string projectName, User student)
-        {
-            if (Role == Role.Mentor)
-            {
-                var project = _projects.Find(x => x.Name == projectName);
-                project.AddStudent(Role, student);
-            }
-        }
-        public void RemoveStudentToProject(string projectName, User student)
-        {
-            if (Role == Role.Mentor)
-            {
-                var project = _projects.Find(x => x.Name == projectName);
-                project.RemoveStudent(Role, student);
-            }
-        }
-        public void AddAttendanceSheetToProject(string projectName, DateTime meetingDate)
-        {
-            if (Role == Role.Mentor)
-            {
-                var project = _projects.Find(x => x.Name == projectName);
-                project.AddAttendanceSheet(new AttendanceSheet(meetingDate));
-            }
-        }
-        public void AddAttendanceToAttendanceSheet(string projectName, DateTime meetingDate, bool attended, User student)
-        {
-            if (Role == Role.Mentor)
-            {                
-                    var project = _projects.Find(x => x.Name == projectName);
-                    var attendanceSheet = project.AttendanceSheets.Find(x => x.MeetingDate == meetingDate);
-                    attendanceSheet.AddAttendance(new Attendance(attended, student));       
-            }
-        }
+        ////Mentor can fill in the project details
+        //public void SetProjectSoruceUri(string projectName, Uri sourceUri)
+        //{
+        //    if (Role == Role.Mentor)
+        //    {
+        //    var project = _projects.Find(x => x.Name == projectName);
+        //    project.SourceLink = sourceUri;
+        //    }
+        //}
+        //public void SetProjectTechnologies(string projectName, string techs)
+        //{
+        //    if (Role == Role.Mentor)
+        //    {
+        //        var project = _projects.Find(x => x.Name == projectName);
+        //        project.UsedTechnologies = techs;
+        //    }
+        //}
+        //public void AddStudentToProject(string projectName, User student)
+        //{
+        //    if (Role == Role.Mentor)
+        //    {
+        //        var project = _projects.Find(x => x.Name == projectName);
+        //        project.AddStudent(Role, student);
+        //    }
+        //}
+        //public void RemoveStudentToProject(string projectName, User student)
+        //{
+        //    if (Role == Role.Mentor)
+        //    {
+        //        var project = _projects.Find(x => x.Name == projectName);
+        //        project.RemoveStudent(Role, student);
+        //    }
+        //}
+        //public void AddAttendanceSheetToProject(string projectName, DateTime meetingDate)
+        //{
+        //    if (Role == Role.Mentor)
+        //    {
+        //        var project = _projects.Find(x => x.Name == projectName);
+        //        project.AddAttendanceSheet(new AttendanceSheet(meetingDate));
+        //    }
+        //}
+        //public void AddAttendanceToAttendanceSheet(string projectName, DateTime meetingDate, bool attended, User student)
+        //{
+        //    if (Role == Role.Mentor)
+        //    {                
+        //            var project = _projects.Find(x => x.Name == projectName);
+        //            var attendanceSheet = project.AttendanceSheets.Find(x => x.MeetingDate == meetingDate);
+        //            attendanceSheet.AddAttendance(new Attendance(attended, student));       
+        //    }
+        //}
 
-        //An admin has the rights to grant any grants, and it's he/she's Job
-        public void GrantGrant(User student, DateTime scholarshipTimestamp)
-        {
-            if (Role == Role.Admin && student.Role == Role.Student)
-            {
-                student.StudentData.ScholarshipTimestamp = scholarshipTimestamp;
-            }
-        }
+        ////An admin has the rights to grant any grants, and it's he/she's Job
+        //public void GrantGrant(User student, DateTime scholarshipTimestamp)
+        //{
+        //    if (Role == Role.Admin && student.Role == Role.Student)
+        //    {
+        //        student.StudentData.ScholarshipTimestamp = scholarshipTimestamp;
+        //    }
+        //}
 
-        //Submitting reviews
-        public void SubmitMentorsReview(User student, string mentorsReview)
-        {         
+        ////Submitting reviews
+        //public void SubmitMentorsReview(User student, string mentorsReview)
+        //{         
 
-            if (Role == Role.Mentor && student.Role == Role.Student)
-            {
-            student.StudentData.Evaluations.Add(new Evaluation(mentorsReview));
-            }
-        }
-        public void SubmitInterviewReview(User student, int semesterId, string interviewReview)
-        {
-            var studentsEvaluationAtThatSemester = student.StudentData.Evaluations.Find(x => x.Semester.Id == semesterId);
-            studentsEvaluationAtThatSemester.InterviewReview = interviewReview;
-        }
+        //    if (Role == Role.Mentor && student.Role == Role.Student)
+        //    {
+        //    student.StudentData.Evaluations.Add(new Evaluation(mentorsReview));
+        //    }
+        //}
+        //public void SubmitInterviewReview(User student, int semesterId, string interviewReview)
+        //{
+        //    var studentsEvaluationAtThatSemester = student.StudentData.Evaluations.Find(x => x.Semester.Id == semesterId);
+        //    studentsEvaluationAtThatSemester.InterviewReview = interviewReview;
+        //}
 
-        public void SetNewPassword(string newPassword)
-        {
-            Password = newPassword;
-        }
+        //public void SetNewPassword(string newPassword)
+        //{
+        //    Password = newPassword;
+        //}
     }
 }

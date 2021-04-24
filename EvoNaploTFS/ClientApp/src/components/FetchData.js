@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GetObjectPropValues from './GetObjectPropValues/GetObjectPropValues';
-import Accordion from './accordion/Accordion';
+import Accordion from './Accordion/Accordion';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -20,29 +20,7 @@ export class FetchData extends Component {
               {forecasts.map(forecast =>
                   <Accordion title={forecast.date} content={GetObjectPropValues(forecast)}/>                
               )}
-          </div>
-      //<table className='table table-striped' aria-labelledby="tabelLabel">
-      //  <thead>
-      //    <tr>
-      //      <th>Adatok</th>
-      //    </tr>
-      //  </thead>
-      //  <tbody>
-      //    {forecasts.map(forecast =>
-      //        <tr key={forecast.date}>
-      //            <td className="accordionHolder">
-      //                <label htmlFor={forecast.date} className="accordionTitle">{forecast.date}</label>
-      //                <input type="checkbox" id={forecast.date} name="accordion_input" className="accordionInput" />
-      //                <div className="accordionContent">
-      //                    <p>{forecast.temperatureC}</p>
-      //                    <p>{forecast.temperatureF}</p>
-      //                    <p>{forecast.summary}</p>
-      //                </div>
-      //            </td>
-      //        </tr>
-      //    )}
-      //  </tbody>
-      //</table>
+          </div>     
     );
   }
 

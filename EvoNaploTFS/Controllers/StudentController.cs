@@ -38,31 +38,31 @@ namespace EvoNaplo.Controllers
             return _studentService.ListStudents();
         }
 
-        //PUT
-        // api/Student/edit jsonben paramból id és bodyból studentDto
-        [HttpPut("edit")]
-        public async Task<int> PutEditStudent(int id, StudentDto studentDto)
-        {
-            await _studentService.EditStudent(id, studentDto);
-            return StatusCodes.Status200OK;
-        }
+        ////PUT
+        //// api/Student/edit jsonben paramból id és bodyból studentDto
+        //[HttpPut("edit")]
+        //public async Task<int> PutEditStudent(int id, StudentDto studentDto)
+        //{
+        //    await _studentService.EditStudent(id, studentDto);
+        //    return StatusCodes.Status200OK;
+        //}
 
-        //PUT
-        // api/Student/inactivate jsonben paramból id
-        [HttpPut("inactivate")]
-        public async Task<int> PutInactivateStudent(int id)
-        {
-            await _studentService.InactivateStudent(id);
-            return StatusCodes.Status200OK;
-        }
+        ////PUT
+        //// api/Student/inactivate jsonben paramból id
+        //[HttpPut("inactivate")]
+        //public async Task<int> PutInactivateStudent(int id)
+        //{
+        //    await _studentService.InactivateStudent(id);
+        //    return StatusCodes.Status200OK;
+        //}
 
-        //Delete
-        // api/Student/delete jsonben paramból id
-        [HttpDelete("delete")]
-        public async Task<int> DeleteStudent(int id)
-        {
-            await _studentService.DeleteStudent(id);
-            return StatusCodes.Status200OK;
-        }
+        ////Delete
+        //// api/Student/delete jsonben paramból id
+        //[HttpDelete("delete")]
+        //public async Task<int> DeleteStudent(int id)
+        //{
+        //    await _studentService.DeleteStudent(id);
+        //    return StatusCodes.Status200OK;
+        //}
     }
 }

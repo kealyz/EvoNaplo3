@@ -24,16 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\MentorListPage\" />
-    <Folder Include="Pages\MentorAddPage\" />
-    <Folder Include="Pages\AdminListPage\" />
-    <Folder Include="Pages\AdminAddPage\" />
-    <Folder Include="Pages\ProjectAddPage\" />
-    <Folder Include="Pages\ProjectListPage\" />
-    <Folder Include="Pages\SemesterAddPage\" />
-    <Folder Include="Pages\SemesterListPage\" />
-    <Folder Include="Pages\StudentAddPage\" />
-    <Folder Include="Pages\StudentListPage\" />
+    <Folder Include="ClientApp\src\AppPages\MentorListPage\" />
+    <Folder Include="ClientApp\src\AppPages\MentorAddPage\" />
+    <Folder Include="ClientApp\src\AppPages\AdminListPage\" />
+    <Folder Include="ClientApp\src\AppPages\AdminAddPage\" />
+    <Folder Include="ClientApp\src\AppPages\ProjectAddPage\" />
+    <Folder Include="ClientApp\src\AppPages\ProjectListPage\" />
+    <Folder Include="ClientApp\src\AppPages\SemesterAddPage\" />
+    <Folder Include="ClientApp\src\AppPages\SemesterListPage\" />
+    <Folder Include="ClientApp\src\AppPages\StudentAddPage\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

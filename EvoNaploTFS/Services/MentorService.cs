@@ -47,44 +47,44 @@ namespace EvoNaplo.Services
 
         }
 
-        public async Task<IEnumerable<User>> EditMentor(int id, MentorDto mentorDto)
-        {
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor keresése");
-            var mentorToEdit = await _evoNaploContext.Users.FindAsync(id);
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor módosítása indul {mentorDto} adatokra");
-            mentorToEdit.Email = mentorDto.Email;
-            mentorToEdit.SetNewPassword(mentorDto.Password);
-            mentorToEdit.FirstName = mentorDto.FirstName;
-            mentorToEdit.LastName = mentorDto.LastName;
-            mentorToEdit.PhoneNumber = mentorDto.PhoneNumber;
-            _evoNaploContext.SaveChanges();
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor módosítása kész");
-            var mentors = _evoNaploContext.Users.Where(m => m.Role == Role.Mentor);
-            return mentors.ToList();
-        }
+        //public async Task<IEnumerable<User>> EditMentor(int id, MentorDto mentorDto)
+        //{
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor keresése");
+        //    var mentorToEdit = await _evoNaploContext.Users.FindAsync(id);
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor módosítása indul {mentorDto} adatokra");
+        //    mentorToEdit.Email = mentorDto.Email;
+        //    mentorToEdit.SetNewPassword(mentorDto.Password);
+        //    mentorToEdit.FirstName = mentorDto.FirstName;
+        //    mentorToEdit.LastName = mentorDto.LastName;
+        //    mentorToEdit.PhoneNumber = mentorDto.PhoneNumber;
+        //    _evoNaploContext.SaveChanges();
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor módosítása kész");
+        //    var mentors = _evoNaploContext.Users.Where(m => m.Role == Role.Mentor);
+        //    return mentors.ToList();
+        //}
 
-        public async Task<IEnumerable<User>> InactivateMentor(int id)
-        {
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor keresése");
-            var mentorToDelete = await _evoNaploContext.Users.FindAsync(id);
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor inaktiválása indul");
-            mentorToDelete.IsActive = false;
-            _evoNaploContext.SaveChanges();
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor inaktiválása kész");
-            var mentors = _evoNaploContext.Users.Where(m => m.Role == Role.Mentor);
-            return mentors.ToList();
-        }
+        //public async Task<IEnumerable<User>> InactivateMentor(int id)
+        //{
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor keresése");
+        //    var mentorToDelete = await _evoNaploContext.Users.FindAsync(id);
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor inaktiválása indul");
+        //    mentorToDelete.IsActive = false;
+        //    _evoNaploContext.SaveChanges();
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor inaktiválása kész");
+        //    var mentors = _evoNaploContext.Users.Where(m => m.Role == Role.Mentor);
+        //    return mentors.ToList();
+        //}
 
-        public async Task<IEnumerable<User>> DeleteMentor(int id)
-        {
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor keresése");
-            var mentorToDelete = await _evoNaploContext.Users.FindAsync(id);
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor törlése indul");
-            _evoNaploContext.Users.Remove(mentorToDelete);
-            _evoNaploContext.SaveChanges();
-            _logger.LogInformation($"{id} ID-vel rendelkező mentor törlése kész");
-            var mentors = _evoNaploContext.Users.Where(m => m.Role == Role.Mentor);
-            return mentors.ToList();
-        }
+        //public async Task<IEnumerable<User>> DeleteMentor(int id)
+        //{
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor keresése");
+        //    var mentorToDelete = await _evoNaploContext.Users.FindAsync(id);
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor törlése indul");
+        //    _evoNaploContext.Users.Remove(mentorToDelete);
+        //    _evoNaploContext.SaveChanges();
+        //    _logger.LogInformation($"{id} ID-vel rendelkező mentor törlése kész");
+        //    var mentors = _evoNaploContext.Users.Where(m => m.Role == Role.Mentor);
+        //    return mentors.ToList();
+        //}
     }
 }

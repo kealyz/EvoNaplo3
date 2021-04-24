@@ -38,31 +38,31 @@ namespace EvoNaplo.Controllers
             return _mentorService.ListMentors();
         }
 
-        //PUT
-        // api/Mentor/edit jsonben paramból id és bodyból mentorDto
-        [HttpPut("edit")]
-        public async Task<int> PutEditMentor(int id, MentorDto mentorDto)
-        {
-            await  _mentorService.EditMentor(id, mentorDto);
-            return StatusCodes.Status200OK;
-        }
+        ////PUT
+        //// api/Mentor/edit jsonben paramból id és bodyból mentorDto
+        //[HttpPut("edit")]
+        //public async Task<int> PutEditMentor(int id, MentorDto mentorDto)
+        //{
+        //    await  _mentorService.EditMentor(id, mentorDto);
+        //    return StatusCodes.Status200OK;
+        //}
 
-        //PUT
-        // api/Mentor/inactivate jsonben paramból id
-        [HttpPut("inactivate")]
-        public async Task<int> PutInactivateMentor(int id)
-        {
-            await _mentorService.InactivateMentor(id);
-            return StatusCodes.Status200OK;
-        }
+        ////PUT
+        //// api/Mentor/inactivate jsonben paramból id
+        //[HttpPut("inactivate")]
+        //public async Task<int> PutInactivateMentor(int id)
+        //{
+        //    await _mentorService.InactivateMentor(id);
+        //    return StatusCodes.Status200OK;
+        //}
 
-        //Delete
-        // api/Mentor/delete jsonben paramból id
-        [HttpDelete("delete")]
-        public async Task<int> DeleteMentor(int id)
-        {
-            await _mentorService.DeleteMentor(id);
-            return StatusCodes.Status200OK;
-        }
+        ////Delete
+        //// api/Mentor/delete jsonben paramból id
+        //[HttpDelete("delete")]
+        //public async Task<int> DeleteMentor(int id)
+        //{
+        //    await _mentorService.DeleteMentor(id);
+        //    return StatusCodes.Status200OK;
+        //}
     }
 }

@@ -1,6 +1,9 @@
+using EvoNaplo.DataAccessLayer;
+using EvoNaplo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +30,15 @@ namespace EvoNaploTFS
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddDbContext<EvoNaploContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddControllers();
+            services.AddScoped<SemesterService>();
+            services.AddScoped<MentorService>();
+            services.AddScoped<StudentService>();
+            ////I hope this is the dependency injection part -marci
+            //services.AddScoped<PasswordService>();
+            //services.AddScoped<LoginService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
