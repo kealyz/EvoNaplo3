@@ -7,18 +7,18 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EvoNaplo.Migrations
+namespace EvoNaploTFS.Migrations
 {
     [DbContext(typeof(EvoNaploContext))]
-    [Migration("20200525065926_EvoNaploDatabaseInitializerV9")]
-    partial class EvoNaploDatabaseInitializerV9
+    [Migration("20210426170534_EvoNaploMigrations")]
+    partial class EvoNaploMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EvoNaplo.Models.Attendance", b =>
@@ -200,12 +200,7 @@ namespace EvoNaplo.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentDataId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentDataId");
 
                     b.ToTable("Users");
                 });
@@ -219,6 +214,8 @@ namespace EvoNaplo.Migrations
                     b.HasOne("EvoNaplo.Models.User", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("EvoNaplo.Models.AttendanceSheet", b =>
@@ -237,13 +234,23 @@ namespace EvoNaplo.Migrations
                     b.HasOne("EvoNaplo.Models.StudentData", null)
                         .WithMany("Evaluations")
                         .HasForeignKey("StudentDataId");
+
+                    b.Navigation("Semester");
                 });
 
-            modelBuilder.Entity("EvoNaplo.Models.User", b =>
+            modelBuilder.Entity("EvoNaplo.Models.AttendanceSheet", b =>
                 {
-                    b.HasOne("EvoNaplo.Models.StudentData", "StudentData")
-                        .WithMany()
-                        .HasForeignKey("StudentDataId");
+                    b.Navigation("AttendancesList");
+                });
+
+            modelBuilder.Entity("EvoNaplo.Models.Project", b =>
+                {
+                    b.Navigation("AttendanceSheets");
+                });
+
+            modelBuilder.Entity("EvoNaplo.Models.StudentData", b =>
+                {
+                    b.Navigation("Evaluations");
                 });
 #pragma warning restore 612, 618
         }

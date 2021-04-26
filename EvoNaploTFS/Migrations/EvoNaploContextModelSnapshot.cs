@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EvoNaplo.Migrations
+namespace EvoNaploTFS.Migrations
 {
     [DbContext(typeof(EvoNaploContext))]
     partial class EvoNaploContextModelSnapshot : ModelSnapshot
@@ -15,8 +15,8 @@ namespace EvoNaplo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EvoNaplo.Models.Attendance", b =>
@@ -212,6 +212,8 @@ namespace EvoNaplo.Migrations
                     b.HasOne("EvoNaplo.Models.User", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("EvoNaplo.Models.AttendanceSheet", b =>
@@ -230,6 +232,23 @@ namespace EvoNaplo.Migrations
                     b.HasOne("EvoNaplo.Models.StudentData", null)
                         .WithMany("Evaluations")
                         .HasForeignKey("StudentDataId");
+
+                    b.Navigation("Semester");
+                });
+
+            modelBuilder.Entity("EvoNaplo.Models.AttendanceSheet", b =>
+                {
+                    b.Navigation("AttendancesList");
+                });
+
+            modelBuilder.Entity("EvoNaplo.Models.Project", b =>
+                {
+                    b.Navigation("AttendanceSheets");
+                });
+
+            modelBuilder.Entity("EvoNaplo.Models.StudentData", b =>
+                {
+                    b.Navigation("Evaluations");
                 });
 #pragma warning restore 612, 618
         }
