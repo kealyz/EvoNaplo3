@@ -17,12 +17,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\AppPages\ProjectListPage\ProjectsPage.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\AppPages\MentorListPage\" />
     <Folder Include="ClientApp\src\AppPages\MentorAddPage\" />
     <Folder Include="ClientApp\src\AppPages\AdminListPage\" />
     <Folder Include="ClientApp\src\AppPages\AdminAddPage\" />
     <Folder Include="ClientApp\src\AppPages\ProjectAddPage\" />
-    <Folder Include="ClientApp\src\AppPages\ProjectListPage\" />
     <Folder Include="ClientApp\src\AppPages\SemesterAddPage\" />
     <Folder Include="ClientApp\src\AppPages\SemesterListPage\" />
     <Folder Include="ClientApp\src\AppPages\StudentAddPage\" />
@@ -44,6 +47,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\AppPages\ProjectListPage\ProjectsPage.js" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
