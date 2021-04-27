@@ -33,7 +33,7 @@ namespace EvoNaplo.Controllers
         // Get
         // api/Projects
         [HttpGet]
-        public IEnumerable<Project> GetProjects()
+        public IEnumerable<Project> GetProject()
         {
             return _projectService.ListProjects();
         }

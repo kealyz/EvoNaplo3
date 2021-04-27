@@ -42,6 +42,7 @@ export class ProjectsPage extends Component {
         const response = await fetch('api/Project');
         const data = await response.json();
         this.setState({ projects: data, loading: false });
+        console.log("aaaa");
         //fetch('api/Student')
         //    .then(response => response.json())
         //    .then(users => console.warn(users))
