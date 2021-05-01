@@ -1,5 +1,5 @@
 using EvoNaplo.DataAccessLayer;
-using EvoNaplo.Services;
+using EvoNaploTFS.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -33,10 +33,10 @@ namespace EvoNaploTFS
 
             services.AddDbContext<EvoNaploContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
             services.AddControllers();
-            services.AddScoped<SemesterService>();
-            services.AddScoped<MentorService>();
+            //services.AddScoped<SemesterService>();
+            //services.AddScoped<MentorService>();
             services.AddScoped<StudentService>();
-            services.AddScoped<ProjectService>();
+            //services.AddScoped<ProjectService>();
             ////I hope this is the dependency injection part -marci
             //services.AddScoped<PasswordService>();
             //services.AddScoped<LoginService>();

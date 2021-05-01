@@ -1,13 +1,13 @@
 ﻿using EvoNaplo.DataAccessLayer;
-using EvoNaplo.Models;
-using EvoNaplo.Models.DTO;
+using EvoNaploTFS.Models;
+using EvoNaploTFS.Models.DTO;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EvoNaplo.Services
+namespace EvoNaploTFS.Services
 {
     public class StudentService
     {
@@ -20,30 +20,39 @@ namespace EvoNaplo.Services
             _evoNaploContext = EvoNaploContext;
         }
 
-        //Student hozzáadása. Ha van phone number akkor úgy hívja meg a konstruktort, egyébként anélkül
-        public async Task<IEnumerable<User>> AddStudent(StudentDto studentDto)
+        public async Task<IEnumerable<User>> AddStudent(User user)
         {
-            _logger.LogInformation($"Diák hozzáadása következik: {studentDto}");
-            if (studentDto.PhoneNumber != null)
-            {
-                await _evoNaploContext.Users.AddAsync(new User(studentDto.Email, studentDto.Password, studentDto.FirstName, studentDto.LastName, studentDto.PhoneNumber, studentDto.UserRole));
-            }
-            else
-            {
-                await _evoNaploContext.Users.AddAsync(new User(studentDto.Email, studentDto.Password, studentDto.FirstName, studentDto.LastName, studentDto.UserRole));
-            }
+            _logger.LogInformation($"Diák hozzáadása következik: {user}");
+            user.Role = User.RoleTypes.Student;
+            await _evoNaploContext.Users.AddAsync(user);
+
             _evoNaploContext.SaveChanges();
-            _logger.LogInformation($"Diák hozzáadva");
-            var students = _evoNaploContext.Users.Where(m => m.Role == Role.Student);
+            _logger.LogInformation($"Diák hozzáadva.");
+            var students = _evoNaploContext.Users.Where(m => m.Role == User.RoleTypes.Student);
             return students.ToList();
         }
 
-        public IEnumerable<User> ListStudents()
+        public IEnumerable<UserDTO> ListActiveStudents()
         {
-            var students = _evoNaploContext.Users.Where(m => m.Role == Role.Student);
-            //var students = _evoNaploContext.Users;
-            return students.ToList();
+            var students = _evoNaploContext.Users.Where(m => m.Role == User.RoleTypes.Student && m.IsActive == true);
+            List<UserDTO> result = new List<UserDTO>();
+            foreach (var student in students)
+            {
+                result.Add(new UserDTO(student));
+            }
+            return result;
 
+        }
+
+        public IEnumerable<UserDTO> ListJanis()
+        {
+            var students = _evoNaploContext.Users.Where(m => m.Role == User.RoleTypes.Jani);
+            List<UserDTO> result = new List<UserDTO>();
+            foreach (var student in students)
+            {
+                result.Add(new UserDTO(student));
+            }
+            return result;
         }
 
         //public async Task<IEnumerable<User>> EditStudent(int id, StudentDto studentDto)

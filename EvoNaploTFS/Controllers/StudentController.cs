@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EvoNaplo.Models;
-using EvoNaplo.Models.DTO;
-using EvoNaplo.Services;
+using EvoNaploTFS.Models;
+using EvoNaploTFS.Models.DTO;
+using EvoNaploTFS.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EvoNaplo.Controllers
+namespace EvoNaploTFS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,21 +21,23 @@ namespace EvoNaplo.Controllers
             _studentService = StudentService;
         }
 
-        // Add
-        // api/Student + studentDto megadása Postman body-ban
         [HttpPost]
-        public async Task<int> PostAddStudent(StudentDto studentDto)
+        public async Task<int> PostAddStudent(User user)
         {
-            await _studentService.AddStudent(studentDto);
+            await _studentService.AddStudent(user);
             return StatusCodes.Status200OK;
         }
 
-        // Get
-        // api/Student
         [HttpGet]
-        public IEnumerable<User> GetStudent()
+        public IEnumerable<UserDTO> GetStudent()
         {
-            return _studentService.ListStudents();
+            return _studentService.ListActiveStudents();
+        }
+
+        [HttpGet("Janik")]
+        public IEnumerable<UserDTO> GetJanis()
+        {
+            return _studentService.ListJanis();
         }
 
         ////PUT

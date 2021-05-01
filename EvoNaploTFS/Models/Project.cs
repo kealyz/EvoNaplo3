@@ -1,49 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace EvoNaplo.Models
+namespace EvoNaploTFS.Models
 {
     public class Project
     {
-
+        [Key]
         public int Id { get; set; }
-        public string  Name { get; set; }
-        public Uri SourceLink { get; set; }
-        public string  UsedTechnologies { get; set; }
+        public string ProjectName { get; set; }
+        public string Description { get; set; }
+        public string SourceLink { get; set; }
+        public string Technologies { get; set; }
+        [ForeignKey("SemesterId")]
         public int SemesterId { get; set; }
-        public List<User> Students = new List<User>();
-        public List<AttendanceSheet> AttendanceSheets { get; set; }
-        public bool IsActive { get; set; }
-
-        public Project(string name, int semesterId)
-        {
-
-            Name = name;
-            SemesterId = semesterId;
-
-            AttendanceSheets = new List<AttendanceSheet>();
-            IsActive = true;
-        }
-
-        public void AddStudent(Role role, User student)
-        {
-            if (role == Role.Mentor)
-            {
-                Students.Add(student);
-            }
-        }
-
-        public void RemoveStudent(Role role, User student)
-        {
-            if (role == Role.Mentor)
-            {
-                Students.Add(student);
-            }
-        }
-
-        public void AddAttendanceSheet(AttendanceSheet attendanceSheet)
-        {
-            AttendanceSheets.Add(attendanceSheet);
-        }
     }
 }

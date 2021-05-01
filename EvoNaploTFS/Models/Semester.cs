@@ -1,26 +1,16 @@
-﻿using Microsoft.AspNetCore.Routing;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace EvoNaplo.Models
+namespace EvoNaploTFS.Models
 {
     public class Semester
     {
+        [Key]
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public DateTime DemoDate { get; set; }
-
-        public bool IsActive { get; set; }
-
-        public Semester(DateTime startDate, DateTime endDate, DateTime demoDate)
-
-        {
-
-            StartDate = startDate;
-            EndDate = endDate;
-            DemoDate = demoDate;
-            IsActive = true;
-
-        }
     }
 }

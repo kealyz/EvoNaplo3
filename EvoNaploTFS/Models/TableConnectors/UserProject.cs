@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EvoNaploTFS.Models
+namespace EvoNaploTFS.Models.TableConnectors
 {
-    public class AttendanceSheet
+    public class UserProject
     {
         [Key]
         public int Id { get; set; }
-        public DateTime MeetingDate { get; set; }
-
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
         [ForeignKey("ProjectId")]
         public int ProjectId { get; set; }
     }
