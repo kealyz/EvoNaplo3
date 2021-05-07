@@ -39,7 +39,7 @@ export class StudentsPage extends Component {
     }
 
     async populateStudentsData() {
-        const response = await fetch('api/Student/Janik');
+        const response = await fetch('api/Student');
         const data = await response.json();
         this.setState({ students: data, loading: false });
         //fetch('api/Student')

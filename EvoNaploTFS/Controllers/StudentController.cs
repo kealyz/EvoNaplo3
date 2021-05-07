@@ -22,7 +22,7 @@ namespace EvoNaploTFS.Controllers
         }
 
         [HttpPost]
-        public async Task<int> PostAddStudent(User user)
+        public async Task<int> PostAddStudent([FromBody]User user)
         {
             await _studentService.AddStudent(user);
             return StatusCodes.Status200OK;
