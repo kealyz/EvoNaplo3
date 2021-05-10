@@ -42,10 +42,6 @@ export class AdminsPage extends Component {
         const response = await fetch('api/Admin');
         const data = await response.json();
         this.setState({ admins: data, loading: false });
-        //fetch('api/Student')
-        //    .then(response => response.json())
-        //    .then(users => console.warn(users))
-
-        //this.setState({ students: users, loading: false });
+        
     }
 }
