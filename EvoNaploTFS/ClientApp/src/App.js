@@ -5,8 +5,9 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { StudentsPage } from './AppPages/StudentListPage/StudentsPage'
+import { MentorsPage } from './AppPages/MentorListPage/MentorsPage'
 import { ProjectsPage } from './AppPages/ProjectListPage/ProjectsPage'
-import RegisterPage from './AppPages/RegisterPage/RegisterPage';
+import  RegisterPage  from './AppPages/RegisterPage/RegisterPage';
 
 import './custom.css'
 import './components/Accordion.css'
@@ -21,6 +22,7 @@ export default class App extends Component {
                 <Route path='/counter' component={Counter} />
                 <Route path='/fetch-data' component={FetchData} />
                 <Route path='/Students' component={StudentsPage} />
+                <Route path='/Mentors' component={MentorsPage} />
                 <Route path='/Projects' component={ProjectsPage} />
                 <Route path='/Register' component={RegisterPage} />
             </Layout>

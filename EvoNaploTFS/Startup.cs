@@ -34,7 +34,7 @@ namespace EvoNaploTFS
             services.AddDbContext<EvoNaploContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
             services.AddControllers();
             //services.AddScoped<SemesterService>();
-            //services.AddScoped<MentorService>();
+            services.AddScoped<MentorService>();
             services.AddScoped<StudentService>();
             //services.AddScoped<ProjectService>();
             ////I hope this is the dependency injection part -marci
