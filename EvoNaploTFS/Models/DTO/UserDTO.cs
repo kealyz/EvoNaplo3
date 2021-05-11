@@ -17,7 +17,7 @@ namespace EvoNaploTFS.Models.DTO
             IsActive = user.IsActive ? "Aktív" : "Inaktív";
             Name = $"{user.FirstName} {user.LastName}";
             Email = user.Email;
-            if (!user.PhoneNumber.Equals(String.Empty))
+            if (!String.IsNullOrEmpty(user.PhoneNumber))
             {
                 PhoneNumber = user.PhoneNumber;
             }

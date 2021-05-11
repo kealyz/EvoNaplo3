@@ -25,11 +25,15 @@ const RegisterPage = () => {
     const onSubmit = e => {
         e.preventDefault()
         setErrors(validate(user));
-        //const data = new FormData(e.target)
-        //console.log(e.target);
-        //fetch('api/Student', { method: 'POST', body: JSON.stringify(data), headers: { "Content-Type": "application/json" } })
-        //    .then(res => res.json())
-        //    .then(json => setUser(json.data))
+        if (Object.keys(errors).length == 0)
+        {
+            //const data = new FormData(e.target)
+            console.log(user);
+            fetch('api/Student', { method: 'POST', body: JSON.stringify(user), headers: { "Content-Type": "application/json" } })
+                //.then(res => res.json())
+                //.then(json => setUser(json.data))
+        }
+        
     }
 
     return (

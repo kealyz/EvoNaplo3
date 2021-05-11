@@ -19,13 +19,13 @@ namespace EvoNaploTFS.Services
             _logger = logger;
             _evoNaploContext = EvoNaploContext;
         }
-
+        //TODO
         public async Task<IEnumerable<User>> AddStudent(User user)
         {
             _logger.LogInformation($"Diák hozzáadása következik: {user}");
             user.Role = User.RoleTypes.Student;
+            user.IsActive = true;
             await _evoNaploContext.Users.AddAsync(user);
-
             _evoNaploContext.SaveChanges();
             _logger.LogInformation($"Diák hozzáadva.");
             var students = _evoNaploContext.Users.Where(m => m.Role == User.RoleTypes.Student);
