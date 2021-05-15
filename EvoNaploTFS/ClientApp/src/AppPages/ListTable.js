@@ -18,16 +18,16 @@ function useWindowSize() {
     return size;
 }
 
-function RemoveContent(row) {
-    alert("Remove data with id [" + row + "]");
+function RemoveContent(row,url) {
+    alert("Remove data with id [" + row + "] (" + url + ")");
 }
 
-function EditContent(row) {
-    alert("Edit data with id [" + row + "]");
+function EditContent(row,url) {
+    alert("Edit data with id [" + row + "] (" + url + ")");
 }
 
-export default function RenderTable({ data }) {
-    const columns = data[0] && Object.keys(data[0]);
+export default function RenderTable(props) {
+    const columns = props.data[0] && Object.keys(props.data[0]);
     const [height, width] = useWindowSize();
 
     if (width > 600) {
@@ -36,19 +36,19 @@ export default function RenderTable({ data }) {
                 <table class="DataListTable">
                     <thead>
                         <tr>
-                            {data[0] && columns.map((heading) => <th>{heading}</th>)}
+                            {props.data[0] && columns.map((heading) => <th>{heading}</th>)}
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((row) =>
+                        {props.data.map((row) =>
                             <tr>
                                 {columns.map((column) =>
                                     <td>{row[column]}</td>
                                 )}
                                 <td>
-                                    <BsPencil class="ActionIcon" onClick={() => EditContent(row.id)} />
-                                    <BsTrashFill class="ActionIcon" onClick={() => RemoveContent(row.id)} />
+                                    <BsPencil class="ActionIcon EditIcon" onClick={() => EditContent(row.id, props.url)} />
+                                    <BsTrashFill class="ActionIcon RemoveIcon" onClick={() => RemoveContent(row.id, props.url)} />
                                 </td>
                             </tr>
                         )}
@@ -60,7 +60,7 @@ export default function RenderTable({ data }) {
     else {
         return (
             <div>
-                {data.map(student =>
+                {props.data.map(student =>
                     <Accordion title={student.name} content={GetObjectPropValues(student)} />
                 )}
             </div>

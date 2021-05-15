@@ -1,11 +1,13 @@
 ﻿.DataListTable {
     width: 100%;
+    font-size: 18px;
 }
 .DataListTable tr td {
     padding: 5px;
 }
     .DataListTable thead tr:first-child {
         background-color: rgba(40,200, 0,0.6);
+        color: rgb(240,240,240);
     }
     .DataListTable thead tr th{
         padding: 5px;
@@ -21,4 +23,10 @@
     .ActionIcon
     {
         cursor: pointer;
+    }
+.EditIcon:hover {
+    color: sandybrown;
+}
+    .RemoveIcon:hover{
+        color: firebrick;
     }

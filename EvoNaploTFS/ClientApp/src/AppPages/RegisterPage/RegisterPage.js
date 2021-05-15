@@ -13,7 +13,11 @@ const RegisterPage = () => {
         password2: ''
     });
 
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({
+        alap: ''
+    });
+
+    const [success, setSuccess] = useState(false);
 
     const handleChange = e => {
         setUser({
@@ -25,18 +29,19 @@ const RegisterPage = () => {
     const onSubmit = e => {
         e.preventDefault()
         setErrors(validate(user));
-        if (Object.keys(errors).length == 0)
-        {
+
+        if (Object.keys(errors).length == 0) {
             fetch('api/Student', { method: 'POST', body: JSON.stringify(user), headers: { "Content-Type": "application/json" } })
                 .then(function (data) {
-                    alert('Registration was successfull. Anyád picsháját! NAVÉGRE!!! MESÜGE..');
-                    //console.log('Request succeeded with JSON response', data);
+                    setSuccess(true);
                 })
                 .catch(function (error) {
-                    alert('Anyádért nem működik..');
-                    //console.log('Request failed', error);
+                    setSuccess(false);
                 });
-                //.then(json => setUser(json.data))
+            document.getElementById("registrationForm").reset();
+        }
+        else {
+            setSuccess(false);
         }
         
     }
@@ -47,7 +52,7 @@ const RegisterPage = () => {
         
         <div class="DivCard">
             <h1>Registration</h1>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} id="registrationForm">
                 {/* register your input into the hook by invoking the "register" function */}
                 <table>
                     <tr>
@@ -83,6 +88,7 @@ const RegisterPage = () => {
                 </table>
                 <input type="submit" />
             </form>
+            {success && <p class="SuccessParagraph">Student {user.firstname} successfully added.</p>}
         </div>
     );
 }
