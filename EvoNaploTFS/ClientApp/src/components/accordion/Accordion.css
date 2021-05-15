@@ -5,19 +5,28 @@
     display: flex;
     flex-direction: column;
 }
+.accordion p{
+    margin: 0 0;
+}
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
-    background-color: limegreen;
+    background-color: rgba(40,200, 0,0.6);
     color: #444;
     cursor: pointer;
-    padding: 18px;
+    padding: 5px;
     display: flex;
     align-items: center;
     border: none;
     outline: none;
     transition: background-color 0.6s ease;
+    vertical-align: middle;
+    text-align: center;
 }
+
+    .accordion:nth-child(2n+1) {
+        margin-top: 5px;
+    }
 
     /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
     .accordion:hover,
@@ -55,9 +64,19 @@
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 14px;
-    padding: 18px;
+    padding: 5px;
 }
-
+.AccordionContentTable
+{
+    table-layout: fixed;
+    width: 100%;
+}
+.AccordionContentTable tr td:first-child
+{
+    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: bold;
+}
 .AccordionContentTable tr:nth-child(even) {
-    background-color: rgba(40 ,200, 0,0.4);
+    background-color: rgba(40,200, 0,0.1);
 }

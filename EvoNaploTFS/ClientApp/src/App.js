@@ -4,7 +4,7 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
-import { StudentsPage } from './AppPages/StudentListPage/StudentsPage'
+import StudentsPage from './AppPages/StudentListPage/StudentsPage'
 import { MentorsPage } from './AppPages/MentorListPage/MentorsPage'
 import { ProjectsPage } from './AppPages/ProjectListPage/ProjectsPage'
 import  RegisterPage  from './AppPages/RegisterPage/RegisterPage';

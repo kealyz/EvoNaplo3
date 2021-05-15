@@ -27,17 +27,24 @@ const RegisterPage = () => {
         setErrors(validate(user));
         if (Object.keys(errors).length == 0)
         {
-            //const data = new FormData(e.target)
-            console.log(user);
             fetch('api/Student', { method: 'POST', body: JSON.stringify(user), headers: { "Content-Type": "application/json" } })
-                //.then(res => res.json())
+                .then(function (data) {
+                    alert('Registration was successfull. Anyád picsháját! NAVÉGRE!!! MESÜGE..');
+                    //console.log('Request succeeded with JSON response', data);
+                })
+                .catch(function (error) {
+                    alert('Anyádért nem működik..');
+                    //console.log('Request failed', error);
+                });
                 //.then(json => setUser(json.data))
         }
         
     }
 
+
     return (
-        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+        
         <div class="DivCard">
             <h1>Registration</h1>
             <form onSubmit={onSubmit}>

@@ -1,51 +1,29 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, useEffect, useState } from 'react';
 import GetObjectPropValues from '../../components/GetObjectPropValues/GetObjectPropValues';
+import GetObjectPropValuesMonitor from '../../components/GetObjectPropValues/GetObjectPropValuesMonitor';
 import Accordion from '../../components/Accordion/Accordion';
+import ListTable from '../ListTable';
 
-export class StudentsPage extends Component {
-    static displayName = StudentsPage.name;
+export default function StudentsPage() {
+    const [data, setData] = useState([]);
+    const [q, setQ] = useState("");
 
-    constructor(props) {
-        super(props);
-        this.state = { students: [], loading: true };
+    useEffect(() => {
+        fetch('api/Student')
+            .then(response => response.json())
+            .then(json => setData(json))
+    }, []);
+
+    function search(rows) {
+        return rows.filter(row=>row.name.toLowerCase().indexOf(q) > -1)
     }
 
-    componentDidMount() {
-        this.populateStudentsData();
-    }
-
-    static renderStudentsTable(students) {
-        return (
-            <div>
-                {students.map(student =>
-                    <Accordion title={student.name} content={GetObjectPropValues(student)} />
-                )}
-            </div>
-        );
-    }
-
-    render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : StudentsPage.renderStudentsTable(this.state.students);
-
-        return (
-            <div>
-                <h1 id="tabelLabel" >Student forecast :)</h1>
-                <p>Pé.</p>
-                {contents}
-            </div>
-        );
-    }
-
-    async populateStudentsData() {
-        const response = await fetch('api/Student');
-        const data = await response.json();
-        this.setState({ students: data, loading: false });
-        //fetch('api/Student')
-        //    .then(response => response.json())
-        //    .then(users => console.warn(users))
-
-        //this.setState({ students: users, loading: false });
-    }
+    return (
+        <div>
+            Filter: <input type="text" value={q} onChange={(e) => setQ(e.target.value)} />
+            <br/>
+            <br/>
+            <ListTable data={search(data)}/>
+        </div>
+    );
 }
