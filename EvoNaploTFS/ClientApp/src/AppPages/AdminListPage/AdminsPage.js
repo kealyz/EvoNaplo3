@@ -1,47 +1,30 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, useEffect, useState } from 'react';
 import GetObjectPropValues from '../../components/GetObjectPropValues/GetObjectPropValues';
+import GetObjectPropValuesMonitor from '../../components/GetObjectPropValues/GetObjectPropValuesMonitor';
 import Accordion from '../../components/Accordion/Accordion';
+import ListTable from '../ListTable';
 
-export class AdminsPage extends Component {
-    static displayName = AdminsPage.name;
+export default function AdminsPage() {
+    const [data, setData] = useState([]);
+    const [q, setQ] = useState("");
+    const fetchUrl = 'api/Admin';
 
-    constructor(props) {
-        super(props);
-        this.state = { admins: [], loading: true };
+    useEffect(() => {
+        fetch(fetchUrl)
+            .then(response => response.json())
+            .then(json => setData(json))
+    }, []);
+
+    function search(rows) {
+        return rows.filter(row => row.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
 
-    componentDidMount() {
-        this.populateAdminsData();
-    }
-
-    static renderAdminsTable(admins) {
-        return (
-            <div>
-                {admins.map(admin =>
-                    <Accordion title={admin.name} content={GetObjectPropValues(admin)} />
-                )}
-            </div>
-        );
-    }
-
-    render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : AdminsPage.renderAdminsTable(this.state.admins);
-
-        return (
-            <div>
-                <h1 id="tabelLabel" >Admin forecast :)</h1>
-                <p>Pé.</p>
-                {contents}
-            </div>
-        );
-    }
-
-    async populateAdminsData() {
-        const response = await fetch('api/Admin');
-        const data = await response.json();
-        this.setState({ admins: data, loading: false });
-        
-    }
+    return (
+        <div>
+            Filter: <input type="text" value={q} onChange={(e) => setQ(e.target.value)} />
+            <br />
+            <br />
+            <ListTable data={search(data)} url={fetchUrl} />
+        </div>
+    );
 }

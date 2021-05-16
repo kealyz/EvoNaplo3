@@ -1,46 +1,30 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, useEffect, useState } from 'react';
 import GetObjectPropValues from '../../components/GetObjectPropValues/GetObjectPropValues';
+import GetObjectPropValuesMonitor from '../../components/GetObjectPropValues/GetObjectPropValuesMonitor';
 import Accordion from '../../components/Accordion/Accordion';
+import ListTable from '../ListTable';
 
-export class MentorsPage extends Component {
-    static displayName = MentorsPage.name;
+export default function MentorsPage()  {
+    const [data, setData] = useState([]);
+    const [q, setQ] = useState("");
+    const fetchUrl = 'api/Mentor';
 
-    constructor(props) {
-        super(props);
-        this.state = { mentors: [], loading: true };
+    useEffect(() => {
+        fetch(fetchUrl)
+            .then(response => response.json())
+            .then(json => setData(json))
+    }, []);
+
+    function search(rows) {
+        return rows.filter(row => row.name.toLowerCase().indexOf(q.toLowerCase()) > -1)
     }
 
-    componentDidMount() {
-        this.populateMentorsData();
-    }
-
-    static renderMentorsTable(mentors) {
-        return (
-            <div>
-                {mentors.map(mentor =>
-                    <Accordion title={mentor.name} content={GetObjectPropValues(mentor)} />
-                )}
-            </div>
-        );
-    }
-
-    render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : MentorsPage.renderMentorsTable(this.state.mentors);
-
-        return (
-            <div>
-                <h1 id="tabelLabel" >Mentor forecast :)</h1>
-                <p>Pé.</p>
-                {contents}
-            </div>
-        );
-    }
-
-    async populateMentorsData() {
-        const response = await fetch('api/Mentor');
-        const data = await response.json();
-        this.setState({ mentors: data, loading: false });
-    }
+    return (
+        <div>
+            Filter: <input type="text" value={q} onChange={(e) => setQ(e.target.value)} />
+            <br />
+            <br />
+            <ListTable data={search(data)} url={fetchUrl} />
+        </div>
+    );
 }
