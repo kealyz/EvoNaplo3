@@ -58,13 +58,13 @@ namespace EvoNaploTFS.Controllers
         //    return StatusCodes.Status200OK;
         //}
 
-        ////Delete
-        //// api/Student/delete jsonben paramból id
-        //[HttpDelete("delete")]
-        //public async Task<int> DeleteStudent(int id)
-        //{
-        //    await _studentService.DeleteStudent(id);
-        //    return StatusCodes.Status200OK;
-        //}
+        //Delete
+        // api/Student/delete jsonben paramból id
+        [HttpDelete("DELETE")]
+        public async Task<int> DeleteUser(int id)
+        {
+            await _studentService.DeleteUser(id);
+            return StatusCodes.Status200OK;
+        }
     }
 }

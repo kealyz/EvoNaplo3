@@ -7,10 +7,10 @@ import ListTable from '../ListTable';
 export default function MentorsPage()  {
     const [data, setData] = useState([]);
     const [q, setQ] = useState("");
-    const fetchUrl = 'api/Mentor';
+    const fetchUrl = '/Mentors';
 
     useEffect(() => {
-        fetch(fetchUrl)
+        fetch('api/User' + fetchUrl)
             .then(response => response.json())
             .then(json => setData(json))
     }, []);
@@ -24,7 +24,7 @@ export default function MentorsPage()  {
             Filter: <input type="text" value={q} onChange={(e) => setQ(e.target.value)} />
             <br />
             <br />
-            <ListTable data={search(data)} url={fetchUrl} />
+            <ListTable data={search(data)} url={'api/User'} />
         </div>
     );
 }

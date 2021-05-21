@@ -41,7 +41,6 @@ namespace EvoNaploTFS.Services
                 result.Add(new UserDTO(student));
             }
             return result;
-
         }
 
         public IEnumerable<UserDTO> ListJanis()
@@ -83,16 +82,14 @@ namespace EvoNaploTFS.Services
         //    return students.ToList();
         //}
 
-        //public async Task<IEnumerable<User>> DeleteStudent(int id)
-        //{
-        //    _logger.LogInformation($"{id} ID-vel rendelkező diák keresése");
-        //    var studentToDelete = await _evoNaploContext.Users.FindAsync(id);
-        //    _logger.LogInformation($"{id} ID-vel rendelkező diák törlése indul");
-        //    _evoNaploContext.Users.Remove(studentToDelete);
-        //    _evoNaploContext.SaveChanges();
-        //    _logger.LogInformation($"{id} ID-vel rendelkező diák törlése kész");
-        //    var students = _evoNaploContext.Users.Where(m => m.Role == Role.Student);
-        //    return students.ToList();
-        //}
+        public async Task<IEnumerable<User>> DeleteUser(int id)
+        {
+            var studentToDelete = await _evoNaploContext.Users.FindAsync(id);
+            var role = studentToDelete.Role;
+            _evoNaploContext.Users.Remove(studentToDelete);
+            _evoNaploContext.SaveChanges();
+            var students = _evoNaploContext.Users.Where(m => m.Role == role);
+            return students.ToList();
+        }
     }
 }

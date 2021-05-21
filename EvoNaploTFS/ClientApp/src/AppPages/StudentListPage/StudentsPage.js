@@ -7,10 +7,11 @@ import ListTable from '../ListTable';
 export default function StudentsPage() {
     const [data, setData] = useState([]);
     const [q, setQ] = useState("");
-    const fetchUrl = 'api/Student';
+    const fetchUrl = '/Students';
+    
 
     useEffect(() => {
-        fetch(fetchUrl)
+        fetch('api/User' + fetchUrl)
             .then(response => response.json())
             .then(json => setData(json))
     }, []);
@@ -24,7 +25,7 @@ export default function StudentsPage() {
             Filter: <input type="text" value={q} onChange={(e) => setQ(e.target.value)} />
             <br/>
             <br/>
-            <ListTable data={search(data)} url={fetchUrl}/>
+            <ListTable data={search(data)} url={'api/User'}/>
         </div>
     );
 }

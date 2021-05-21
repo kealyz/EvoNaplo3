@@ -18,9 +18,7 @@ function useWindowSize() {
     return size;
 }
 
-function RemoveContent(row,url) {
-    alert("Remove data with id [" + row + "] (" + url + ")");
-}
+
 
 function EditContent(row,url) {
     alert("Edit data with id [" + row + "] (" + url + ")");
@@ -29,6 +27,14 @@ function EditContent(row,url) {
 export default function RenderTable(props) {
     const columns = props.data[0] && Object.keys(props.data[0]);
     const [height, width] = useWindowSize();
+    const users = props.data;
+
+    function RemoveContent(row, url) {
+        //alert("Remove data with id [" + row + "] (" + url + ")");
+        url = url + "/DELETE/?ID=" + row;
+        fetch(url, { method: 'DELETE' });
+        window.location.reload(false);
+    }
 
     if (width > 600) {
         return (
@@ -41,7 +47,7 @@ export default function RenderTable(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {props.data.map((row) =>
+                        {users.map((row) =>
                             <tr>
                                 {columns.map((column) =>
                                     <td>{row[column]}</td>
