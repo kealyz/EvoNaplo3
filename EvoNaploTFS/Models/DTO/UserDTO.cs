@@ -13,10 +13,15 @@ namespace EvoNaploTFS.Models.DTO
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
+        public UserDTO()
+        {
+            Id = -1;
+        }
+
         public UserDTO(User user)
         {
             Id = user.Id;
-            IsActive = user.IsActive ? "Inactive" : "Active";
+            IsActive = user.IsActive ? "Active" : "Inactive";
             Name = $"{user.FirstName} {user.LastName}";
             Email = user.Email;
             if (!String.IsNullOrEmpty(user.PhoneNumber))

@@ -9,6 +9,7 @@ import  MentorsPage  from './AppPages/MentorListPage/MentorsPage'
 import { ProjectsPage } from './AppPages/ProjectListPage/ProjectsPage'
 import  RegisterPage  from './AppPages/RegisterPage/RegisterPage';
 import  AdminsPage  from './AppPages/AdminListPage/AdminsPage';
+import UserPageView from './AppPages/UserPageView/UserPageView';
 
 import './custom.css'
 import './components/Accordion.css'
@@ -27,6 +28,7 @@ export default class App extends Component {
                 <Route path='/Projects' component={ProjectsPage} />
                 <Route path='/Register' component={RegisterPage} />
                 <Route path='/Admins' component={AdminsPage} />
+                <Route path='/UserPageView/:id' component={UserPageView} />
             </Layout>
         );
     }

@@ -13,9 +13,7 @@ const RegisterPage = () => {
         password2: ''
     });
 
-    const [errors, setErrors] = useState({
-        alap: ''
-    });
+    const [errors, setErrors] = useState({});
 
     const [success, setSuccess] = useState(false);
 
@@ -28,9 +26,11 @@ const RegisterPage = () => {
 
     const onSubmit = e => {
         e.preventDefault()
-        setErrors(validate(user));
 
-        if (Object.keys(errors).length == 0) {
+        const returnedErrors = validate(user);
+        setErrors(returnedErrors);
+
+        if (Object.keys(returnedErrors).length == 0) {
             fetch('api/Student', { method: 'POST', body: JSON.stringify(user), headers: { "Content-Type": "application/json" } })
                 .then(function (data) {
                     setSuccess(true);
@@ -43,13 +43,13 @@ const RegisterPage = () => {
         else {
             setSuccess(false);
         }
-        
+
     }
 
 
     return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        
+        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+
         <div class="DivCard">
             <h1>Registration</h1>
             <form onSubmit={onSubmit} id="registrationForm">

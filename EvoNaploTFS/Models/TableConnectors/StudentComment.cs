@@ -11,6 +11,7 @@ namespace EvoNaploTFS.Models.TableConnectors
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Comment { get; set; }
         [ForeignKey("UserId")]
         public int UserId { get; set; }

@@ -1,4 +1,5 @@
 ﻿using EvoNaploTFS.Models.DTO;
+using EvoNaploTFS.Models.TableConnectors;
 using EvoNaploTFS.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,18 @@ namespace EvoNaploTFS.Controllers
         public IEnumerable<UserDTO> GetAdmin()
         {
             return _userService.ListActiveAdmins();
+        }
+
+        [HttpGet("GetUserById")]
+        public UserDTO GetUserById(int id)
+        {
+            return _userService.GetUserById(id);
+        }
+        
+        [HttpGet("GetStudentComments")]
+        public IEnumerable<StudentCommentDTO> GetStudentComments(int id)
+        {
+            return _userService.GetStudentComments(id);
         }
 
         //Delete
